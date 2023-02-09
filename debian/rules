@@ -5,7 +5,7 @@
 
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 
-export QT_SELECT := qt5
+export QT_SELECT := qt6
 
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
@@ -19,7 +19,9 @@ override_dh_auto_clean:
 	rm -rf $(CURDIR)/.local
 
 override_dh_auto_configure:
-	dh_auto_configure -- QT_BUILD_PARTS+=tests QMAKE_PYTHON=python3
+	qmake6 \
+	QT_BUILD_PARTS+=tests \
+	QMAKE_PYTHON=python3
 
 override_dh_auto_build-indep:
 	dh_auto_build -- docs
@@ -38,4 +40,3 @@ override_dh_auto_install-indep:
 	dh_auto_build -- INSTALL_ROOT=$(CURDIR)/debian/tmp install_docs
 
 override_dh_auto_test-indep:
-

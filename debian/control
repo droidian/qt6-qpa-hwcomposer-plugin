@@ -1,15 +1,17 @@
-Source: qt5-qpa-hwcomposer-plugin
+Source: qt6-qpa-hwcomposer-plugin
 Section: libs
 Maintainer: Erik Inkinen <erik.inkinen@gmail.com>
 Priority: optional
 Build-Depends: pkg-kde-tools,
-               qt5-qmake,
-               qtbase5-private-gles-dev,
-               qtbase5-gles-dev,
-               qtwayland5-private-dev,
-               qtdeclarative5-private-dev,
-               libqt5quick5-gles,
-               libqt5gui5-gles,
+               qmake6 (>= 6.4.2-1+git~),
+               qt6-base-dev (>= 6.4.2-1+git~),
+               qt6-base-private-dev (>= 6.4.2-1+git~),
+               qt6-wayland-dev,
+               qt6-base-private-dev (>= 6.4.2-1+git~),
+               qt6-declarative-dev (>= 6.4.2-1+git~),
+               qt6-declarative-private-dev (>= 6.4.2-1+git~),
+               libqt6quick6,
+               libqt6gui6,
                android-headers,
                libhybris-dev,
                pkg-config,
@@ -20,10 +22,10 @@ Build-Depends: pkg-kde-tools,
                libwayland-dev
 Standards-Version: 4.5.1
 
-Package: qt5-qpa-hwcomposer-plugin
+Package: qt6-qpa-hwcomposer-plugin
 Architecture: any
 Multi-Arch: foreign
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Description: This package contains a Qt 5 QPA plugin using libhybris' Droid
+Description: This package contains a Qt 6 QPA plugin using libhybris' Droid
  hwcomposer for composing content onto the screen.
