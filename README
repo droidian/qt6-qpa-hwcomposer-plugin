@@ -1,4 +1,4 @@
-Qt 5 QPA hwcomposer plugin
+Qt 6 QPA hwcomposer plugin
 ==========================
 
 This QPA plugin allows rendering on top of libhybris-based hwcomposer EGL
@@ -12,7 +12,7 @@ it that would make it harder to integrate hwcomposer features into the QPA.
 Build requirements
 ------------------
 
-  - Qt 5 devel packages
+  - Qt 6 devel packages
   - libhybris devel packages
   - Droid headers
 
