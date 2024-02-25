@@ -3,12 +3,11 @@ Section: libs
 Maintainer: Erik Inkinen <erik.inkinen@gmail.com>
 Priority: optional
 Build-Depends: pkg-kde-tools,
-               qmake6 (>= 6.4.2-1+git~),
                qt6-base-dev (>= 6.4.2-1+git~),
                qt6-base-private-dev (>= 6.4.2-1+git~),
+               qt6-wayland,
                qt6-wayland-dev,
                qt6-wayland-private-dev,
-               qt6-base-private-dev (>= 6.4.2-1+git~),
                qt6-declarative-dev (>= 6.4.2-1+git~),
                qt6-declarative-private-dev (>= 6.4.2-1+git~),
                libqt6quick6,
@@ -20,7 +19,8 @@ Build-Depends: pkg-kde-tools,
                libglib2.0-dev,
                libmtdev-dev,
                libwayland-server0,
-               libwayland-dev
+               libwayland-dev,
+               cmake
 Standards-Version: 4.5.1
 
 Package: qt6-qpa-hwcomposer-plugin
