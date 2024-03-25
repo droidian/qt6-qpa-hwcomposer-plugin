@@ -12,6 +12,7 @@ pkg_check_modules(HWC_androidheaders REQUIRED android-headers)
 pkg_check_modules(HWC_hwcomposerwindow REQUIRED hwcomposer-egl)
 pkg_check_modules(HWC_hybriseglplatform REQUIRED hybris-egl-platform)
 pkg_check_modules(PKG_sync REQUIRED libsync)
+pkg_check_modules(PKG_udev REQUIRED libudev)
 
 qt_add_library(hwcomposer MODULE
                 hwcomposer/main.cpp
@@ -42,6 +43,7 @@ target_link_libraries(hwcomposer PUBLIC Qt::Core
                                         Qt::DBus
                                         ${EGL_LIBRARIES}
                                         ${PKG_sync_LIBRARIES}
+                                        ${PKG_udev_LIBRARIES}
                                         ${HWC_libhardware_LIBRARIES}
                                         ${HWC_androidheaders_LIBRARIES}
                                         ${HWC_hwcomposerwindow_LIBRARIES}
@@ -53,7 +55,8 @@ target_include_directories(hwcomposer PUBLIC ${EGL_INCLUDE_DIRS}
                                                 ${HWC_androidheaders_INCLUDE_DIRS}
                                                 ${HWC_hwcomposerwindow_INCLUDE_DIRS}
                                                 ${HWC_hybriseglplatform_INCLUDE_DIRS}
-                                                ${PKG_sync_INCLUDE_DIRS})
+                                                ${PKG_sync_INCLUDE_DIRS}
+                                                ${PKG_udev_INCLUDE_DIRS})
 
 install(TARGETS hwcomposer
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/qt6/plugins/platforms/)

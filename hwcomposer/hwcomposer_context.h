@@ -54,6 +54,7 @@
 #include <QtGui/QSurfaceFormat>
 #include <QtGui/QImage>
 #include <EGL/egl.h>
+#include <libudev.h>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
 #include <QtGui/private/qeglplatformcontext_p.h>
@@ -99,6 +100,9 @@ private:
     bool display_off;
     bool window_created;
     qreal fps;
+
+    struct udev *udevInstance;
+    int restoreBrightness = 0;
 };
 
 QT_END_NAMESPACE

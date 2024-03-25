@@ -68,6 +68,8 @@ HwComposerContext::HwComposerContext()
     fps = backend->refreshRate();
 
     info = new HwComposerScreenInfo(backend);
+    
+    udevInstance = udev_new();
 }
 
 HwComposerContext::~HwComposerContext()
@@ -149,13 +151,36 @@ void HwComposerContext::swapToWindow(QEglFSContext *context, QPlatformSurface *s
 
 void HwComposerContext::sleepDisplay(bool sleep)
 {
+	struct udev_device *udevDevice = udev_device_new_from_syspath(
+        udevInstance, "/sys/class/leds/lcd-backlight");
     if (sleep) {
-        qDebug("sleepDisplay");
+        if (udevDevice) {
+            restoreBrightness = QString(
+                udev_device_get_sysattr_value(
+                    udevDevice, "brightness"))
+                .toInt();
+            if (restoreBrightness == 0)
+                restoreBrightness = QString(
+                    udev_device_get_sysattr_value(
+                        udevDevice, "max_brightness"))
+                    .toInt();
+            udev_device_set_sysattr_value(
+                udevDevice, "brightness",
+                std::to_string(0).c_str());
+        }
+        qDebug() << "sleepDisplay:" << restoreBrightness << "> 0";
         display_off = true;
     } else {
-        qDebug("unsleepDisplay");
+        if (udevDevice && restoreBrightness > 0)
+            udev_device_set_sysattr_value(
+                udevDevice, "brightness",
+                std::to_string(restoreBrightness).c_str());
+        qDebug() << "unsleepDisplay: 0 >" << restoreBrightness;
         display_off = false;
     }
+
+    if (udevDevice)
+        udev_device_unref(udevDevice);
 
     backend->sleepDisplay(sleep);
 }
