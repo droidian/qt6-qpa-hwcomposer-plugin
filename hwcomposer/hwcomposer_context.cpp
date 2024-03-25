@@ -170,7 +170,11 @@ void HwComposerContext::sleepDisplay(bool sleep)
         }
         qDebug() << "sleepDisplay:" << restoreBrightness << "> 0";
         display_off = true;
-    } else {
+    }
+
+    backend->sleepDisplay(sleep);
+
+    if (!sleep) {
         if (udevDevice && restoreBrightness > 0)
             udev_device_set_sysattr_value(
                 udevDevice, "brightness",
@@ -181,8 +185,6 @@ void HwComposerContext::sleepDisplay(bool sleep)
 
     if (udevDevice)
         udev_device_unref(udevDevice);
-
-    backend->sleepDisplay(sleep);
 }
 
 qreal HwComposerContext::refreshRate() const
