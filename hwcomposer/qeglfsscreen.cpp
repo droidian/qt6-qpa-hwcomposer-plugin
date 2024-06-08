@@ -122,6 +122,15 @@ QDpi QEglFSScreen::logicalDpi() const
                 Q_MM_PER_INCH * s.height() / ps.height());
 }
 
+QPlatformScreen::PowerState QEglFSScreen::powerState() const
+{
+    return m_hwc->isSleeping() ? PowerStateOff : PowerStateOn;
+}
+
+void QEglFSScreen::setPowerState(QPlatformScreen::PowerState state)
+{
+    m_hwc->sleepDisplay(PowerStateOn != state);
+}
 
 qreal QEglFSScreen::refreshRate() const
 {

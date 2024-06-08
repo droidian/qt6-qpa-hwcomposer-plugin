@@ -77,6 +77,9 @@ public:
     QSizeF physicalSize() const;
     QDpi logicalDpi() const;
 
+    QPlatformScreen::PowerState powerState() const override;
+    void setPowerState(QPlatformScreen::PowerState state) override;
+
     EGLDisplay display() const { return m_dpy; }
 
     qreal refreshRate() const;

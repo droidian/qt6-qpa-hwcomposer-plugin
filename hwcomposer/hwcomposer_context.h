@@ -90,6 +90,11 @@ public:
     void swapToWindow(QEglFSContext *context, QPlatformSurface *surface);
 
     void sleepDisplay(bool sleep);
+    inline bool isSleeping() const
+    {
+        return display_off;
+    }
+
     qreal refreshRate() const;
 
     bool requestUpdate(QEglFSWindow *window);
